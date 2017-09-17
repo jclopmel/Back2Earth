@@ -15,6 +15,12 @@ var snd = new Audio("../sounds/gateOpen.wav");
 var snd2 = new Audio ("../sounds/sniff.wav");
 var snd3 = new Audio ("../sounds/duda.wav");
 
+/*--------------------------------------Funcion para cambiar de fase-------------------------------------------*/
+
+function nextStage(){   
+  location.href="stage2.html";
+} 
+
 /*--------------------------------------Funcion de crear circulos-------------------------------------------*/
 
 function circleButton (){
@@ -47,6 +53,7 @@ function checkCode(){
                     $("#mainContainer").css('background-image','url("../img/celda5b.jpg")');
                     stage.find("Circle").destroy();
                     snd.play();
+                    rojo.draggable(true);
             }
 
             /*if(currentCode[0]==secretCode[0] && currentCode[1]==secretCode[1] && currentCode[2]==secretCode[2] && currentCode[3]==secretCode[3] && currentCode[4]==secretCode[4] && currentCode[5]==secretCode[5] && currentCode[6]==secretCode[6]){
@@ -158,7 +165,7 @@ var rojo = new Konva.Image({
     y: 150,
     width: 150,
     height: 400,
-    draggable: true,
+    draggable: false,
     txt: "Si pudiese ver la cerradura de la puerta, desde el otro lado..."
 });
 layer.add(rojo);
@@ -338,12 +345,15 @@ layer.on('mouseout', function(evt) {
         }else if(shape.attrs.txt==newHorn.attrs.txt && posxout>=-50 && posyout>=70 && posxout<=100 && posyout<=410){
             newHorn.hide();
             leftView();
+        }else if(shape.attrs.txt==rojo.attrs.txt && posxout>=350 && posyout>=0 && posxout<=750 && posyout<=140){
+            console.log("rojo en su sitio");
+            nextStage();
         }else{
             tweenPlay(shape);
                 };
         
         /*console.log(shape.attrs.txt);
-        console.log(mirror.attrs.txt);
+        console.log(rojo.attrs.txt);
         console.log(posxout);
         console.log(posyout);*/
     
@@ -353,4 +363,5 @@ layer.on('mouseout', function(evt) {
 /*stage.on('contentClick', function() {
       console.log('content click on ' + JSON.stringify(stage.getPointerPosition()));
       return pos=JSON.stringify(stage.getPointerPosition());
+      
     });*/

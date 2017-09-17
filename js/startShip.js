@@ -1,6 +1,6 @@
 (function(){
 
-    window.addEventListener('load',init,false);
+    window.addEventListener('load',startGame,false);
 
 /*--------------------------------------declaracion de variables--------------------------------*/
 
@@ -11,14 +11,17 @@
         keyDown        = 40;
 
     var canvas          = document.getElementById('canvas'),
-        ctx;
-    var lastPress;
+        ctx,
+        lastPress;
     var pressing        = [];
     var player          = newArea(90,280,120,120);
+    var earth           = newArea(0,0,200,200);
     var shots           = [];
     var gameover        = true;
     var score           = 0;
-    var enemies         = [];
+    var topScore        = 30;
+    var asteroids       = [];
+    var timeout         = 5000;
 
     var spritesheet     = new Image();
     spritesheet.src     = "/img/Stage2/playerShip.png";
@@ -29,36 +32,45 @@
     var spritesheet3     = new Image();
     spritesheet3.src     = "/img/Stage2/shot.png";
 
+    var spritesheet4     = new Image();
+    spritesheet4.src     = "/img/Stage2/earthSmall.png";
+
     var snd              = new Audio("../sounds/shot.wav");
     var snd2             = new Audio("../sounds/explosion.mp3");
+
+    var bg               = new Image();
+    bg.src               = "/img/Stage2/backgound1.jpg";
+    var bgMove           = 0;
+
+    function bgMoving (){
+        bgMove+=3;
+        if (bgMove>0){
+            bgMove -= 700;
+        }
+    }
 
     function newArea(x, y, width, heigth){
         var result = new Rectangle(x,y,width,heigth);
         return result;
     }
 
-
     function random(max){
         return ~~(Math.random()*max);
     }
 
-    /*function slope (){
-        return Math.random()*10-5;
-    }*/
-
-    function init(){                                                //Ejecuta el juego y sus funciones principales
+    function startGame(){                                                //Ejecuta el juego y sus funciones principales
         ctx=canvas.getContext('2d');
         
-        run();
+        refreshTime();
         repaint();
     }
 
-    function run(){                                                //recarga el juego cada 50 milisg
-        setTimeout(run,50);
-        act();
+    function refreshTime(){                                                //recarga el juego cada 50 ms
+        setTimeout(refreshTime,50);
+        movePlay();
     }
 
-    function repaint(){                                                //Pinta el juego a cada cambio
+    function repaint(){                                                     //Pinta el juego a cada cambio
         requestAnimationFrame(repaint);
         paint(ctx);
     }
@@ -69,34 +81,55 @@
         player.x=500;
         player.y=380;
         shots.length=0;
-        enemies.length=0;
-        enemies.push(newArea(30,0,60,60));
-        enemies.push(newArea(600,0,60,60));
+        asteroids.length=0;
+        setTimeout(function (){
+            asteroids.push(newArea(30,0,60,60));
+            asteroids.push(newArea(600,0,60,60));
+        }, timeout);
         gameover=false;
 
     }
 
-    function act(){                                                //Funcionalidad
-            // Move Rect
+    function keyPush (){
+        if(pressing[keyUP]){
+            player.y-=20;
+                }
+        if(pressing[keyRigth]){
+            player.x+=20;
+        }
+        if(pressing[keyDown]){
+            player.y+=20;
+        }
+        if(pressing[keyLeft]){
+            player.x-=20;
+        }
+
+    }
+
+    function shotMove(){
+        for(var i=0,l=shots.length;i<l;i++){
+                shots[i].y-=30;
+                if(shots[i].y<0){
+                    shots.splice(i--,1);
+                    l--;
+                }
+            }
+    }
+
+    function movePlay(){                                                //Funcionalidad
+/*-----------------------------------------Movimiento de la nave-------------------------------------------*/
         if(gameover){
             reset();
-        }else{    
-            if(pressing[keyUP])
-                player.y-=20;
-            if(pressing[keyRigth])
-                player.x+=20;
-            if(pressing[keyDown])
-                player.y+=20;
-            if(pressing[keyLeft])
-                player.x-=20;
+        }else{
 
-            // Out Screen
+            keyPush ();  
+/*------------------------------------------Limite de pantalla-----------------------------------------------*/
             if(player.x>canvas.width-player.width)
                 player.x=canvas.width-player.width;
             if(player.x<0)
                 player.x=0;
             
-            // New Shot
+/*-------------------------------------Acción de disparo doble y movimiento---------------------------------------*/
                 if(lastPress==keySpace){
                     shots.push(newArea(player.x+15,player.y,28,40));
                     shots.push(newArea(player.x+95,player.y,28,40));
@@ -106,59 +139,55 @@
                 }
             
             // Move Shots
-            for(var i=0,l=shots.length;i<l;i++){
-                shots[i].y-=30;
-                if(shots[i].y<0){
-                    shots.splice(i--,1);
-                    l--;
-                }
-            }
+            
+            shotMove();
 
-            // Move Enemies
-            for(var i=0,l=enemies.length;i<l;i++){
-            // Shot Intersects Enemy
+/*-------------------------------------Movimiento de arteroides e interaccion---------------------------------------*/
+         setTimeout(function(){
+            for(var i=0,l=asteroids.length;i<l;i++){
+            // Disparo-asteroide
                 for(var j=0,ll=shots.length;j<ll;j++){
-                    if(shots[j].intersects(enemies[i])){
+                    if(shots[j].intersects(asteroids[i])){
                         score++;
-                        enemies[i].x=random(canvas.width/10)*10;
-                        enemies[i].y=0;
-                        enemies.push(newArea(random(canvas.width/10)*10,0,60,60));
+                        asteroids[i].x=random(canvas.width/10)*10;
+                        asteroids[i].y=0;
+                        asteroids.push(newArea(random(canvas.width/10)*10,0,60,60));
                         shots.splice(j--,1);
                         ll--;
                     }
                 }
                 
-                enemies[i].y+= 10;
-                //enemies[i].x+= slope();
-                if(enemies[i].y>canvas.height){
-                    enemies[i].x=random(canvas.width/10)*10;
-                    enemies[i].y=0;
+                asteroids[i].y+= 10;
+                if(asteroids[i].y>canvas.height){
+                    asteroids[i].x=random(canvas.width/10)*10;
+                    asteroids[i].y=0;
                 }
                 
-                // Player Intersects Enemy
-                if(player.intersects(enemies[i])){
+                // Lose condition
+                if(player.intersects(asteroids[i])){
                     gameover=true;
 
                     snd2.load();
                     snd2.play();
-                }
                 
-                // Shot Intersects Enemy
-                for(var j=0,ll=shots.length;j<ll;j++){
-                    if(shots[j].intersects(enemies[i])){
-                        score++;
-                        enemies[i].x=random(canvas.width/10)*10;
-                        enemies[i].y=0;
-                        enemies.push(newArea(random(canvas.width/10)*10,0,60,60));
-                        shots.splice(j--,1);
-                        ll--;
-                        snd2.load();
-                        snd2.play();
-                    }
+                }
+                if(score>=topScore){                        //Condiciona fin: Earth
+                    earth.x = 700;
+                    earth.y +=0.25; 
+                    if(earth.y>=200){
+                            earth.y=200;
+                        }
+                    if(earth.intersects(player)){
+                            console.log("win!!!!!");
+                        }  
+
                 }
             }
+        }, timeout);
 
         }
+
+        bgMoving();
 
     }
 
@@ -166,24 +195,26 @@
 
     function paint(ctx){
 
-        ctx.fillStyle='#000';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.drawImage(bg, 0, bgMove);                                   //Dibuja el fondo priero y luego movido
+        ctx.drawImage(bg, 0, 700+bgMove);
         
         ctx.fillStyle='#0f0';                                           //Dibuja la nave del jugador
         player.drawImageArea(ctx,spritesheet, 0, 0, 120, 125, 200, 200, 120, 125);
 
+        ctx.fillStyle='#0f0';                                           //Dibuja la tierra
+        if(score>=topScore){
+            earth.drawImageArea(ctx,spritesheet4, 0, 0, 200, 200, 200, 200, 200, 200);
+        }   
+
         ctx.fillStyle='#00f';
-        for(var i=0,l=enemies.length;i<l;i++){
-            enemies[i].drawImageArea(ctx,spritesheet2, 0, 0, 60, 65, 200, 200, 40, 40);
+        for(var i=0,l=asteroids.length;i<l;i++){                            //Dibuja asteroides
+            asteroids[i].drawImageArea(ctx,spritesheet2, 0, 0, 60, 65, 200, 200, 40, 40);
         }
         ctx.fillStyle='#f00';
-        for(var i=0,l=shots.length;i<l;i++)
+        for(var i=0,l=shots.length;i<l;i++)                                //Dibuja shots
             shots[i].drawImageArea(ctx,spritesheet3, 0, 0, 30, 40, 200, 200, 30, 40);
         
         ctx.fillStyle='#fff';
-
-        if(gameover)
-            ctx.fillText('GAME OVER',100,150);
     }
 
     document.addEventListener('keydown',function(evt){
