@@ -2,17 +2,25 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Rojo. The Game</title>
+	<title>Back2Earth</title>
+	<link rel='shortcut icon' type='image/x-icon' href='./img/favicon.ico' />
 	<link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" href="styles/bootstrap.css">
 	<script src="https://cdn.rawgit.com/konvajs/konva/1.6.5/konva.min.js"> </script>
 	<script src="js/jquery-2.1.4.js"></script>
 	
 </head>
+
+
 <body>
-	<div class="container stage2container">
-		<canvas id="canvas" width="1100" height="600"></canvas>
+	<h1 class="mainh1">Back2Earth - The game</h1>
+	<img src="./img/Logo.png" alt="Logo Back2Earth">
+	<div class="loadScreen container">
+		<form class="form-group" action="stage1.html">
+			<input class="form-control form-control-lg" type="text" placeholder="Introduce tu nombre">
+			<input class="start btn btn-warning" type="submit" value="Empezar a jugar">
+		</form>
+	
 	</div>
-	<script src="js/startShip.js"></script>
 </body>
 </html>

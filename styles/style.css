@@ -11,14 +11,27 @@ body{
 	height: 600px;
 	margin-top: 2%;
 }
-.message{
+.message{                   /*             Style para el bocadillo sobre el pj                     */
 	z-index: 2000;
-	background-color: white;
 	position: fixed;
 	text-align: center;
-	padding: 30px;
-	border-radius: 10px;
+	background-color: white;
+	opacity: 0.9;
+	color: grey;
+	font-weight:bold;
+	margin-top: 2%;
+	margin-left: 15%;
+    padding: 20px;
+    border-radius: 8px;
 }
+/*.message::after{
+   position: absolute;
+   top: 100%;
+   left: 10px;
+   border-top: 20px solid white;
+   border-left: 20px solid transparent;
+   border-right: 20px solid transparent;
+}*/
 .bg2{
 	background-image: url("../img/celda5b.jpg");
 }
@@ -31,4 +44,55 @@ canvas{
 
 .stage2container{
 	margin-top: 2%;
+}
+/*--------------------------------------Stylesheet for index-------------------------------------*/
+.loadScreen{
+	background-color: white;
+	opacity: 0.5;
+	border-style: solid;
+	border-color: black;
+	border-width: 10px;
+	border-radius: 30px;
+	margin-top: 2%;
+	height: 500px;
+	width: 1100;
+	display: table;
+}
+.loadScreen>form{
+	margin: auto;
+	display: table-cell;
+	vertical-align: middle;
+}
+input{
+	padding: 50px;
+}
+.start{
+	margin-top:20px;
+	margin-left: 35%;
+	padding: 20px 80px;
+	color: black;
+	cursor: pointer;
+}
+.start2{
+	margin-top: 20%;
+	margin-left: 40%;
+	color: #fff;
+    background-color: #f0ad4e;
+    padding: 20px 80px;
+    border-color: #f0ad4e;
+	cursor: pointer;
+	border-radius: 20px;
+}
+img{
+	position: fixed;
+	margin-top: 2%;
+	margin-left: 38%;
+	z-index: 2000;
+}
+.mainh1{
+	text-align: center;
+	font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: navajowhite;
 }

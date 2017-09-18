@@ -1,6 +1,7 @@
 (function(){
 
     window.addEventListener('load',startGame,false);
+    console.timeEnd("t1");
 
 /*--------------------------------------declaracion de variables--------------------------------*/
 
@@ -41,6 +42,10 @@
     var bg               = new Image();
     bg.src               = "/img/Stage2/backgound1.jpg";
     var bgMove           = 0;
+
+    function nextStage(){   
+      location.href="gameOver.html";
+    } 
 
     function bgMoving (){
         bgMove+=3;
@@ -178,7 +183,7 @@
                             earth.y=200;
                         }
                     if(earth.intersects(player)){
-                            console.log("win!!!!!");
+                            nextStage();
                         }  
 
                 }
