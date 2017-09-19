@@ -6,21 +6,23 @@
 	<link rel='shortcut icon' type='image/x-icon' href='./img/favicon.ico' />
 	<link rel="stylesheet" href="styles/style.css">
 	<link rel="stylesheet" href="styles/bootstrap.css">
-	<script src="https://cdn.rawgit.com/konvajs/konva/1.6.5/konva.min.js"> </script>
 	<script src="js/jquery-2.1.4.js"></script>
 	
 </head>
 
 
 <body>
-	<h1 class="mainh1">Back2Earth - The game</h1>
 	<img src="./img/Logo.png" alt="Logo Back2Earth">
+	<h1 class="mainh1">Back2Earth - The game</h1>
 	<div class="loadScreen container">
-		<form class="form-group" action="stage1.html">
-			<input class="form-control form-control-lg" type="text" placeholder="Introduce tu nombre">
-			<input class="start btn btn-warning" type="submit" value="Empezar a jugar">
+		<form class="form-group" action="animation1.html" onsubmit="newPlayer ()">
+			<input id="inputName" class="form-control form-control-lg" type="text" placeholder="Introduce tu nombre" required>
+			<input class="start2" type="submit" value="Empezar a jugar">
 		</form>
 	
 	</div>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+	<script src="js/BDconnect.js"></script>
 </body>
 </html>

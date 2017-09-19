@@ -66,15 +66,8 @@ canvas{
 input{
 	padding: 50px;
 }
-.start{
-	margin-top:20px;
-	margin-left: 35%;
-	padding: 20px 80px;
-	color: black;
-	cursor: pointer;
-}
 .start2{
-	margin-top: 20%;
+	margin-top: 2%;
 	margin-left: 40%;
 	color: #fff;
     background-color: #f0ad4e;
@@ -85,8 +78,7 @@ input{
 }
 img{
 	position: fixed;
-	margin-top: 2%;
-	margin-left: 38%;
+	margin-left: 85%;
 	z-index: 2000;
 }
 .mainh1{
@@ -95,4 +87,18 @@ img{
     font-weight: 800;
     line-height: 1.1;
     color: navajowhite;
+}
+/*--------------------------------------Stylesheet for gamover-------------------------------------*/
+#gameover>li{
+	list-style: upper-roman;
+	padding: 1rem;
+	margin-left: 10%;
+	font-family: "Coiny", cursive;
+	font-size: 1.2rem;
+}
+button>a:link{
+	text-decoration:none;
+}
+a:hover{
+	color:white;
 }

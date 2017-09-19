@@ -1,7 +1,6 @@
 (function(){
 
     window.addEventListener('load',startGame,false);
-    console.timeEnd("t1");
 
 /*--------------------------------------declaracion de variables--------------------------------*/
 
@@ -9,7 +8,8 @@
         keyLeft        = 37,
         keyUP          = 38,
         keyRigth       = 39,
-        keyDown        = 40;
+        keyDown        = 40,
+        speed          = 20;
 
     var canvas          = document.getElementById('canvas'),
         ctx,
@@ -97,16 +97,16 @@
 
     function keyPush (){
         if(pressing[keyUP]){
-            player.y-=20;
+            player.y-=speed;
                 }
         if(pressing[keyRigth]){
-            player.x+=20;
+            player.x+=speed;
         }
         if(pressing[keyDown]){
-            player.y+=20;
+            player.y+=speed;
         }
         if(pressing[keyLeft]){
-            player.x-=20;
+            player.x-=speed;
         }
 
     }

@@ -13,10 +13,14 @@
 
 
 <body>
-	<h1 class="mainh1">Back2Earth - The game</h1>
 	<img src="./img/Logo.png" alt="Logo Back2Earth">
+	<h1 class="mainh1">Back2Earth - The game</h1>
 	<div class="loadScreen container">
-		<input class="start2" type="submit" value="Volverlo a intentar" action="index.html">
+		<ol id="gameover"></ol>
+		<button class="start2"><a href="index.html">Volverlo a intentar</a></button>
 	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+	<script src="js/BDconnect.js"></script>
 </body>
 </html>

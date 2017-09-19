@@ -14,16 +14,17 @@
     var secretCode  = [2,1,0,3,4,7];
     var currentCode = [];
 
-    var snd = new Audio("./sounds/gateOpen.wav");
-    var snd2 = new Audio ("./sounds/sniff.wav");
-    var snd3 = new Audio ("./sounds/duda.wav");
-    console.time("t1");
+    var snd         = new Audio("./sounds/gateOpen.wav");
+    var snd2        = new Audio ("./sounds/sniff.wav");
+    var snd3        = new Audio ("./sounds/duda.wav");
 
-    
+    /*var startTime   = new Date();
+    var bdarray     = [];
+    var bdarray2     = [];*/
 
     /*--------------------------------------Funcion para cambiar de fase-------------------------------------------*/
 
-    function nextStage(){   
+    function nextStage(){ 
       location.href="stage2.html";
     } 
 
@@ -364,10 +365,39 @@
         
     });
 
+  /* function timer(){                                                   //Actualziar datos de tiempo en BD
 
-    /*stage.on('contentClick', function() {
-          console.log('content click on ' + JSON.stringify(stage.getPointerPosition()));
-          return pos=JSON.stringify(stage.getPointerPosition());
+         var config = {
+            apiKey: "AIzaSyAkVbI1lQV57a1Q9RO9mlSz1W9NPZXQQxY",
+            authDomain: "back2earth-1234.firebaseapp.com",
+            databaseURL: "https://back2earth-1234.firebaseio.com",
+            projectId: "back2earth-1234",
+            storageBucket: "back2earth-1234.appspot.com",
+            messagingSenderId: "858443560107"
+          };
+
+        firebase.initializeApp(config);
+        //newval = firebase.database().ref();
+
+        $.get("https://back2earth-1234.firebaseio.com/player/.json", function (data){
+
+            firebase.database().ref("player").on("child_added", snapshot => {
+                //$("#gameover").prepend("<li><b>Nombre:</b> "+snapshot.val().name+"</li>");
+                bdarray.push(snapshot.val());
+            });
+
+       });  
+       console.log(bdarray);  
+    }
+
+    stage.on('contentClick', function() {
+        console.log('content click on ' + JSON.stringify(stage.getPointerPosition()));
+        timer();
+        return pos=JSON.stringify(stage.getPointerPosition());
           
-        });*/
+        });
+
+*/
+
+
 }());
