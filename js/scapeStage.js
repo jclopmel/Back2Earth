@@ -25,7 +25,7 @@
     /*--------------------------------------Funcion para cambiar de fase-------------------------------------------*/
 
     function nextStage(){ 
-      location.href="stage2.html";
+      location.href="animation3.html";
     } 
 
     /*--------------------------------------Funcion de crear circulos-------------------------------------------*/

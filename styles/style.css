@@ -89,9 +89,12 @@ img{
     color: navajowhite;
 }
 /*--------------------------------------Stylesheet for gamover-------------------------------------*/
+#gameover{
+	padding-top: 2rem;
+}
 #gameover>li{
 	list-style: upper-roman;
-	padding: 1rem;
+	padding: 1.5rem;
 	margin-left: 10%;
 	font-family: "Coiny", cursive;
 	font-size: 1.2rem;

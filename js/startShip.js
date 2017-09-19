@@ -44,7 +44,7 @@
     var bgMove           = 0;
 
     function nextStage(){   
-      location.href="gameOver.html";
+      location.href="animation2.html";
     } 
 
     function bgMoving (){
