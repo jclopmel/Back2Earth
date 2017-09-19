@@ -16,6 +16,10 @@
     spritesheet2.src    = "/img/Anim/bg2.jpg";
     var bg              = newArea(0,0,1100,600);
 
+    var spritesheet3    = new Image();
+    spritesheet3.src    = "/img/Anim/icon.png";
+    var icon              = newArea(490,460,40,40);
+
     var snd             = new Audio ("../sounds/ufo.mp3");
 
 
@@ -54,8 +58,8 @@
                 ufo.x += 2;
                 ufo.y += 5;
             }
-        if (ufo.y>=460){
-           setTimeout(nextStage(),3000); 
+        if (ufo.y>460){
+           nextStage();
         }
                  
 
@@ -75,6 +79,12 @@
         ctx.fillStyle='#0f0';                                                       //Dibuja el ufo
         ufo.drawImageArea(ctx,spritesheet, 0, 0, 149, 99, 120, 120, 149, 99);   
 
+
+         if (ufo.y>=460){
+            ctx.fillStyle='#0f0';                                                       //Dibuja el icono
+            icon.drawImageArea(ctx,spritesheet3, 0, 0, 40, 40, 30, 30, 40, 40);  
+        }
+         
 
         ctx.fillStyle='#fff';
 
