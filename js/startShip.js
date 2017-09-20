@@ -22,7 +22,7 @@
     var score           = 0;
     var topScore        = 30;
     var asteroids       = [];
-    var timeout         = 5000;
+    var timeout         = 4000;
 
     var spritesheet     = new Image();
     spritesheet.src     = "/img/Stage2/playerShip.png";
@@ -47,10 +47,6 @@
     bg.src               = "/img/Stage2/backgound1.jpg";
     var bgMove           = 0;
 
-    function nextStage(){   
-      location.href="animation2.html";
-      timer();
-    } 
 
     function bgMoving (){
         bgMove+=3;
@@ -188,9 +184,12 @@
                             earth.y=200;
                         }
                     if(earth.intersects(player)){
-                            nextStage();
-                            timer();
-                        }  
+
+                        timer();
+                        setTimeout(function nextStage(){
+                            location.href="animation2.html";
+                        },1500);                        
+                    }  
 
                 }
             }
@@ -287,6 +286,7 @@
 
             firebase.database().ref("player").on("child_added", snapshot => {                  //Localiza objectos dentro de la ID
 
+                console.log(snapshot.val());
                 if (snapshot.val().time2==0){
                     var startTime = Date.now();
                     var obj = {
@@ -296,7 +296,6 @@
 
                     var temp = snapshot.ref.path.ct[1];
                     firebase.database().ref("player").child(temp).update(obj);                  //Actualiza lo indicado (obj) en child temp
-
                 }
             });
        });  

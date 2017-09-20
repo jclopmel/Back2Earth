@@ -28,13 +28,7 @@
 
 /*-----------------------------------------obtener datos para final screen------------------------------------------------*/
     
-
-    function getTime (t2, t1){
-        conver = (t2-t1)/1000;
-        minutes = Math.floor(conver/60);
-        seconds = conver%60;
-    }
-    
+  
 
     $.get("https://back2earth-1234.firebaseio.com/player/.json", function (data){
 

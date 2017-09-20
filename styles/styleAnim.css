@@ -1,6 +1,14 @@
 body{
-	background-image: url("../img/Stage2/backgound1.jpg");
-	background-size:auto;
+	background-image: url("../img/Stage2/backgound2.jpg");
+	animation: body 36s linear infinite;
+
+}
+@keyframes body {
+	0%   {background-position: 0 100%;}
+
+
+
+	100%  {background-position: 0 0%;}
 }
 
 .stage2container{
