@@ -24,6 +24,10 @@
     spritesheet4.src    = "/img/Anim/rojo2.png";
     var rojo            = newArea(600,150,202,249);
 
+    var spritesheet5    = new Image();
+    spritesheet5.src    = "/img/Anim/shot.png";
+    var shot            = newArea(580,250,70,33);
+
     var contador        = 0;
     var mensajes        = ["¡ jIH tul vetlh chugh maH !",
                             "¡ Alto o disparo !",
@@ -33,13 +37,14 @@
                             "O me ayudas o disparo",
                             "¡nuqneH!, está bien pero deja el arma"]
 
-    var voice             = new Audio ("../sounds/voice.mp3");
+    var voice           = new Audio ("../sounds/voice.mp3");
     var snd2            = new Audio ("../sounds/alien.mp3");
+    var snd             = new Audio("../sounds/shot.wav");
 
 
 /*------------------------------Functiones--------------------------------------------*/
     function nextStage(){ 
-           location.href="stage2.html";  
+         location.href="stage2.html";  
     } 
 
     function newArea(x, y, width, heigth){
@@ -60,6 +65,11 @@
         contador++;
     }
 
+    function shotMove(){
+        shot.y -= 30;
+        shot.x -= 70;
+    }
+
     function repaint(){                                                     //Pinta el juego a cada cambio
         requestAnimationFrame(repaint);
         paint(ctx);
@@ -73,6 +83,13 @@
         if(contador==100 || contador==200){
             voice.play();
         }
+        if (contador>=50){
+            shotMove();
+            if (contador==50){
+                snd.play();
+            } 
+        }
+        
     }
 
     function primeraFrase(){
@@ -95,6 +112,7 @@
         ctx.font="30px Georgia white";                          //Humano
         if(contador<=100){
             ctx.fillText(mensajes[1],800,100);
+            
         }else if(contador<=200){
             ctx.fillText(mensajes[3],800,100);
         }else if(contador<=300){
@@ -117,6 +135,10 @@
         bast.drawImageArea(ctx,spritesheet3, 0, 0, 210, 248, 120, 120, 210, 248);           //Dibuja el alien 
 
         rojo.drawImageArea(ctx,spritesheet4, 0, 0, 202, 249, 120, 120, 202, 249);           //Dibuja el humano
+
+        if(contador>=50){
+            shot.drawImageArea(ctx,spritesheet5, 0, 0, 70, 33, 40, 40, 70, 33);                  //Dibuja el shot
+        }
 
         primeraFrase();
 
@@ -141,7 +163,4 @@
         else
             ctx.strokeRect(this.x,this.y,this.width,this.height);
     }
-
-
-
 })();

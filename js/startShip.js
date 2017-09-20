@@ -36,6 +36,10 @@
     var spritesheet4     = new Image();
     spritesheet4.src     = "/img/Stage2/earthSmall.png";
 
+    var spritesheet5     = new Image();
+    spritesheet5.src     = "/img/Stage2/keys.png";
+    var keys             = newArea(800,50,250,59);
+
     var snd              = new Audio("../sounds/shot.wav");
     var snd2             = new Audio("../sounds/explosion.mp3");
 
@@ -202,11 +206,17 @@
 
     function paint(ctx){
 
-        ctx.drawImage(bg, 0, bgMove);                                   //Dibuja el fondo priero y luego movido
+        ctx.drawImage(bg, 0, bgMove);                                           //Dibuja el fondo priero y luego movido
         ctx.drawImage(bg, 0, 700+bgMove);
-        
-                                                                             //Dibuja la nave del jugador
-        player.drawImageArea(ctx,spritesheet, 0, 0, 120, 125, 200, 200, 120, 125);
+                                                        
+        ctx.font="20px Georgia white";
+        ctx.fillText("Score: "+score,30,30);                                     //Score
+                                                                             
+        player.drawImageArea(ctx,spritesheet, 0, 0, 120, 125, 200, 200, 120, 125);  //Dibuja la nave del jugador
+
+        if(score<1){
+            keys.drawImageArea(ctx,spritesheet5, 0, 0, 250, 59, 200, 200, 250, 59);
+        }
 
                                                   
         if(score>=topScore){                                                    //Dibuja la tierra
