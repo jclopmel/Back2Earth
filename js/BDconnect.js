@@ -14,23 +14,38 @@
 /*-----------------------------------------input name en index-----------------------------------------------------*/
 
     function newPlayer (){
-        var player = $("#inputName").val();
-        obj = {
+      var date = Date.now();
+      var player = $("#inputName").val();
+      obj = {
            name: player,
-           time1: 0,
-           time2: null
-        };
-        newval.child("player").push(obj);
+           time1: date,
+           time2: 0
+      };
+      newval.child("player").push(obj);
     }
 
     
 
 /*-----------------------------------------obtener datos para final screen------------------------------------------------*/
+    
+
+    function getTime (t2, t1){
+        conver = (t2-t1)/1000;
+        minutes = Math.floor(conver/60);
+        seconds = conver%60;
+    }
+    
 
     $.get("https://back2earth-1234.firebaseio.com/player/.json", function (data){
 
             firebase.database().ref("player").on("child_added", snapshot => {
-                $("#gameover").prepend("<li><b>Nombre:</b> "+snapshot.val().name+"</li>");
+              var t1 = snapshot.val().time1;
+              var t2 = snapshot.val().time2;
+              var conver = (t2-t1)/1000;
+              var minutes = Math.floor(conver/60);
+              var seconds = Math.floor(conver%60);
+
+              $("#gameover").prepend("<li><b>Nombre:</b> "+snapshot.val().name+" <b> Score:</b>"+minutes+" minutos y "+seconds+" segundos</li>");
             });
 
           

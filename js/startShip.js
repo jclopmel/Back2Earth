@@ -45,6 +45,7 @@
 
     function nextStage(){   
       location.href="animation2.html";
+      timer();
     } 
 
     function bgMoving (){
@@ -184,6 +185,7 @@
                         }
                     if(earth.intersects(player)){
                             nextStage();
+                            timer();
                         }  
 
                 }
@@ -203,19 +205,19 @@
         ctx.drawImage(bg, 0, bgMove);                                   //Dibuja el fondo priero y luego movido
         ctx.drawImage(bg, 0, 700+bgMove);
         
-        ctx.fillStyle='#0f0';                                           //Dibuja la nave del jugador
+                                                                             //Dibuja la nave del jugador
         player.drawImageArea(ctx,spritesheet, 0, 0, 120, 125, 200, 200, 120, 125);
 
-        ctx.fillStyle='#0f0';                                           //Dibuja la tierra
-        if(score>=topScore){
+                                                  
+        if(score>=topScore){                                                    //Dibuja la tierra
             earth.drawImageArea(ctx,spritesheet4, 0, 0, 200, 200, 200, 200, 200, 200);
         }   
 
-        ctx.fillStyle='#00f';
+        
         for(var i=0,l=asteroids.length;i<l;i++){                            //Dibuja asteroides
             asteroids[i].drawImageArea(ctx,spritesheet2, 0, 0, 60, 65, 200, 200, 40, 40);
         }
-        ctx.fillStyle='#f00';
+        
         for(var i=0,l=shots.length;i<l;i++)                                //Dibuja shots
             shots[i].drawImageArea(ctx,spritesheet3, 0, 0, 30, 40, 200, 200, 30, 40);
         
@@ -256,6 +258,38 @@
             ctx.drawImage(img,sx,sy,sw,sh,this.x,this.y,this.width,this.height);
         else
             ctx.strokeRect(this.x,this.y,this.width,this.height);
+    }
+
+    function timer(){                                                                       //Datos de acceso a firebase
+
+         var config = {
+            apiKey: "AIzaSyAkVbI1lQV57a1Q9RO9mlSz1W9NPZXQQxY",
+            authDomain: "back2earth-1234.firebaseapp.com",
+            databaseURL: "https://back2earth-1234.firebaseio.com",
+            projectId: "back2earth-1234",
+            storageBucket: "back2earth-1234.appspot.com",
+            messagingSenderId: "858443560107"
+          };
+
+        firebase.initializeApp(config);
+
+        $.get("https://back2earth-1234.firebaseio.com/player/.json", function (data){
+
+            firebase.database().ref("player").on("child_added", snapshot => {                  //Localiza objectos dentro de la ID
+
+                if (snapshot.val().time2==0){
+                    var startTime = Date.now();
+                    var obj = {
+                        time2 : startTime
+                    }
+                    let update = {};
+
+                    var temp = snapshot.ref.path.ct[1];
+                    firebase.database().ref("player").child(temp).update(obj);                  //Actualiza lo indicado (obj) en child temp
+
+                }
+            });
+       });  
     }
 
 })();

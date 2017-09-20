@@ -24,10 +24,6 @@
 
 
 /*------------------------------Functiones--------------------------------------------*/
-    function nextStage(){ 
-            location.href="gameOver.html";  
-    } 
-
     function newArea(x, y, width, heigth){
         var result = new Rectangle(x,y,width,heigth);
         return result;
@@ -59,7 +55,9 @@
                 ufo.y += 5;
             }
         if (ufo.y>460){
-           nextStage();
+            setTimeout(function nextStage(){
+                location.href="gameOver.html"; 
+            }, 3000); 
         }
                  
 

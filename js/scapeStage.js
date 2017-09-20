@@ -18,10 +18,6 @@
     var snd2        = new Audio ("./sounds/sniff.wav");
     var snd3        = new Audio ("./sounds/duda.wav");
 
-    /*var startTime   = new Date();
-    var bdarray     = [];
-    var bdarray2     = [];*/
-
     /*--------------------------------------Funcion para cambiar de fase-------------------------------------------*/
 
     function nextStage(){ 
@@ -216,7 +212,6 @@
             };
             imageObj7.src = './img/sideView3.png';
 
-            //hoverZoom();                                                       quitar zoom que da prolemas sino lo arreglo
             stage.on('contentClick', function() {
                 sideView.hide();
                 newHorn.show();
@@ -262,13 +257,7 @@
                     };
                     imageObj8.src = './img/screen.png';
 
-                    /*if (stage.find("Circle").length<1){*/
-                        circleButton();
-                   /* }else{
-                        stage.find("Circle").show();
-                    }
-    */
-                    
+                    circleButton();
 
                     layer.on('mouseover', function(evt) {                   //Condicional del patrón a insertar
                         var shape = evt.target;
@@ -357,47 +346,7 @@
             }else{
                 tweenPlay(shape);
                     };
-            
-            /*console.log(shape.attrs.txt);
-            console.log(rojo.attrs.txt);
-            console.log(posxout);
-            console.log(posyout);*/
-        
+                    
     });
-
-  /* function timer(){                                                   //Actualziar datos de tiempo en BD
-
-         var config = {
-            apiKey: "AIzaSyAkVbI1lQV57a1Q9RO9mlSz1W9NPZXQQxY",
-            authDomain: "back2earth-1234.firebaseapp.com",
-            databaseURL: "https://back2earth-1234.firebaseio.com",
-            projectId: "back2earth-1234",
-            storageBucket: "back2earth-1234.appspot.com",
-            messagingSenderId: "858443560107"
-          };
-
-        firebase.initializeApp(config);
-        //newval = firebase.database().ref();
-
-        $.get("https://back2earth-1234.firebaseio.com/player/.json", function (data){
-
-            firebase.database().ref("player").on("child_added", snapshot => {
-                //$("#gameover").prepend("<li><b>Nombre:</b> "+snapshot.val().name+"</li>");
-                bdarray.push(snapshot.val());
-            });
-
-       });  
-       console.log(bdarray);  
-    }
-
-    stage.on('contentClick', function() {
-        console.log('content click on ' + JSON.stringify(stage.getPointerPosition()));
-        timer();
-        return pos=JSON.stringify(stage.getPointerPosition());
-          
-        });
-
-*/
-
 
 }());

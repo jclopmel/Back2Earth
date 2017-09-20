@@ -101,13 +101,7 @@
           drawLigth ();
           ctx.fillStyle='#0f0';                                                       //Dibuja el UFO
         rojo.drawImageArea(ctx,spritesheet4, 0, 0, 20, 31, 120, 120, 20, 31);  
-        }
-
-        /*if (rojo.y>=160){
-            ctx.fillStyle='#0f0';                                                       //Dibuja el UFO
-            rojo.drawImageArea(ctx,spritesheet4, 0, 0, 20, 31, 120, 120, 20, 31);  
-        } */        
-          
+        }          
 
         ctx.fillStyle='#fff';
 

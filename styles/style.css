@@ -1,9 +1,18 @@
 /*-------------------------Stylesheet for every page and first stage----------------------------------*/
 
 body{
-	background-image: url("../img/Stage2/backgound1.jpg");
-	background-size:auto;
+	background-image: url("../img/Stage2/backgound2.jpg");
+	animation: body 36s linear infinite;
+
 }
+@keyframes body {
+	0%   {background-position: 0 100%;}
+
+
+
+	100%  {background-position: 0 0%;}
+}
+
 #mainContainer{
 	background-image: url("../img/celda5.jpg");
 	background-size:contain;
@@ -24,14 +33,6 @@ body{
     padding: 20px;
     border-radius: 8px;
 }
-/*.message::after{
-   position: absolute;
-   top: 100%;
-   left: 10px;
-   border-top: 20px solid white;
-   border-left: 20px solid transparent;
-   border-right: 20px solid transparent;
-}*/
 .bg2{
 	background-image: url("../img/celda5b.jpg");
 }
@@ -48,10 +49,10 @@ canvas{
 /*--------------------------------------Stylesheet for index-------------------------------------*/
 .loadScreen{
 	background-color: white;
-	opacity: 0.5;
+	opacity: 0.8;
 	border-style: solid;
-	border-color: black;
-	border-width: 10px;
+	border-color: #f89400;
+	border-width: 5px;
 	border-radius: 30px;
 	margin-top: 2%;
 	height: 500px;
@@ -67,12 +68,13 @@ input{
 	padding: 50px;
 }
 .start2{
-	margin-top: 2%;
+	margin-top: 3%;
+	margin-bottom: 2%;
 	margin-left: 40%;
 	color: #fff;
-    background-color: #f0ad4e;
+    background-color: #f89400;
     padding: 20px 80px;
-    border-color: #f0ad4e;
+    border-color: #f89400;
 	cursor: pointer;
 	border-radius: 20px;
 }
@@ -86,7 +88,7 @@ img{
 	font-size: 4.5rem;
     font-weight: 800;
     line-height: 1.1;
-    color: navajowhite;
+    color: #f89400;
 }
 /*--------------------------------------Stylesheet for gamover-------------------------------------*/
 #gameover{
