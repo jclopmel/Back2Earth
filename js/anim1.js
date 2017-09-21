@@ -2,7 +2,6 @@
 
     window.addEventListener('load',startGame,false);
 
-
 /*--------------------------------------declaracion de variables--------------------------------*/
     
     var canvas          = document.getElementById('canvas'),
@@ -99,7 +98,7 @@
 
         if(ufo.y>=100 && rojo.y>=160){
           drawLigth ();
-          ctx.fillStyle='#0f0';                                                       //Dibuja el UFO
+          ctx.fillStyle='#0f0';                                                       //Dibuja la luz
         rojo.drawImageArea(ctx,spritesheet4, 0, 0, 20, 31, 120, 120, 20, 31);  
         }          
 
